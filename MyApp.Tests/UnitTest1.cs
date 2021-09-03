@@ -37,5 +37,16 @@ namespace MyApp.Tests
             //Assert
             Assert.Equal(true, output);
         }
+
+        [Fact]
+        public void LeapYear15False()
+        {
+            //Arrage
+            var leapYear = new Program();
+            //Act
+            var output = leapYear.IsLeapYear(15);
+            //Assert
+            Assert.Equal(false, output);
+        }
     }
 }
