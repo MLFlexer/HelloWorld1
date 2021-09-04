@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Xunit;
 
 namespace MyApp.Tests
@@ -47,6 +48,38 @@ namespace MyApp.Tests
             var output = leapYear.IsLeapYear(15);
             //Assert
             Assert.Equal(false, output);
+        }
+
+        [Fact]
+        public void LeapYear15nay()
+        {
+            //Arrage
+            var leapYear = new Program();
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            //Act
+            var expected = "nay\r\n";
+            leapYear.LeapYearYayOrNay("15");
+            
+            var output = writer.GetStringBuilder().ToString();
+            //Assert
+            Assert.Equal(expected, output);
+        }
+
+        [Fact]
+        public void LeapYear16yay()
+        {
+            //Arrage
+            var leapYear = new Program();
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            //Act
+            var expected = "yay\r\n";
+            leapYear.LeapYearYayOrNay("16");
+            
+            var output = writer.GetStringBuilder().ToString();
+            //Assert
+            Assert.Equal(expected, output);
         }
     }
 }
