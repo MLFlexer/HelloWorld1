@@ -59,7 +59,7 @@ namespace MyApp.Tests
             Console.SetOut(writer);
             //Act
             var expected = "nay\r\n";
-            leapYear.LeapYearYayOrNay("15");
+            leapYear.LeapYearYayOrNay("1599");
             
             var output = writer.GetStringBuilder().ToString();
             //Assert
@@ -75,11 +75,33 @@ namespace MyApp.Tests
             Console.SetOut(writer);
             //Act
             var expected = "yay\r\n";
-            leapYear.LeapYearYayOrNay("16");
+            leapYear.LeapYearYayOrNay("1600");
             
             var output = writer.GetStringBuilder().ToString();
             //Assert
             Assert.Equal(expected, output);
+        }
+
+        [Fact]
+        public void LeapYearYayOrNay_Throws_YearLessThen1582Exception()
+        {
+            //Arrange
+            var program = new Program();
+            //Act
+            
+            //Assert
+            Assert.Throws<YearLessThen1582Exception>(() => program.LeapYearYayOrNay("1580"));
+        }
+
+        [Fact]
+        public void LeapYearYayOrNay_Throws_FormatException()
+        {
+            //Arrange
+            var program = new Program();
+            //Act
+            
+            //Assert
+            Assert.Throws<FormatException>(() => program.LeapYearYayOrNay("s"));
         }
     }
 }
