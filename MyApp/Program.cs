@@ -14,18 +14,38 @@ namespace MyApp
         {
             Console.WriteLine("Please enter year, to check if it is a leap year:");
             var userInput = Console.ReadLine();
+            try
+            {
             LeapYearYayOrNay(userInput);
+            }
+            catch (YearLessThen1582Exception e) 
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Could not calculate Leap Year, because input was not in the form of an integer");
+            }
         }
 
         public void LeapYearYayOrNay(string userInput) {
 
             var year = int.Parse(userInput);
-            if (IsLeapYear(year))
+
+            if (year < 1582)
             {
-                Console.WriteLine("yay");
-            }
-            else {
-                Console.WriteLine("nay");
+                throw new YearLessThen1582Exception("Leap year can only be calculated based on years from 1582");
+            } 
+            else 
+            {
+
+                if (IsLeapYear(year))
+                {
+                    Console.WriteLine("yay");
+                }
+                else {
+                    Console.WriteLine("nay");
+                }
             }
         }
 
